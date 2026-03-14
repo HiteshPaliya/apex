@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-BugBounty Orchestrator v4.1 — PART 2: Attack + Orchestrator
+Apex v4.1 — PART 2: Attack + Apex
 ============================================================
-Combine with core.py to produce the full orchestrator:
-    cat core.py attack.py > orchestrator.py
-    python3 orchestrator.py -t example.com
+Combine with core.py to produce the full apex:
+    cat core.py attack.py > apex.py
+    python3 apex.py -t example.com
 
 This file assumes all classes from core.py are already defined.
 """
@@ -967,10 +967,10 @@ class Reporter:
 """)
 
 # ══════════════════════════════════════════════════════════════
-# 15. ORCHESTRATOR
+# 15. APEX
 # ══════════════════════════════════════════════════════════════
 
-class Orchestrator:
+class Apex:
     def __init__(self, args):
         self.target   = (args.target
                          .replace("https://", "").replace("http://", "")
@@ -1201,7 +1201,7 @@ class Orchestrator:
 
 def main():
     parser = argparse.ArgumentParser(
-        description=f"BugBounty Orchestrator v{VERSION} — Kali/WSL2",
+        description=f"Apex v{VERSION} — Kali/WSL2",
         formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument("-t", "--target",
@@ -1247,7 +1247,7 @@ def main():
     if not args.target:
         parser.error("-t/--target is required")
 
-    Orchestrator(args).run()
+    Apex(args).run()
 
 
 if __name__ == "__main__":

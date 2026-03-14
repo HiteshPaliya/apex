@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# BugBounty Toolkit Installer — Kali Linux / WSL2
+# Apex Installer — Kali Linux / WSL2
 # Usage: chmod +x install.sh && ./install.sh
 # ============================================================
 set -euo pipefail
@@ -19,13 +19,13 @@ mkdir -p "$TOOLS_DIR"
 
 echo -e "${BOLD}${CYAN}"
 cat << 'EOF'
-  ██████╗ ██╗   ██╗ ██████╗ ██████╗  ██████╗ ██╗   ██╗███╗   ██╗████████╗██╗   ██╗
-  ██╔══██╗██║   ██║██╔════╝ ██╔══██╗██╔═══██╗██║   ██║████╗  ██║╚══██╔══╝╚██╗ ██╔╝
-  ██████╔╝██║   ██║██║  ███╗██████╔╝██║   ██║██║   ██║██╔██╗ ██║   ██║    ╚████╔╝
-  ██╔══██╗██║   ██║██║   ██║██╔══██╗██║   ██║██║   ██║██║╚██╗██║   ██║     ╚██╔╝
-  ██████╔╝╚██████╔╝╚██████╔╝██████╔╝╚██████╔╝╚██████╔╝██║ ╚████║   ██║      ██║
-  ╚═════╝  ╚═════╝  ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝   ╚═╝      ╚═╝
-  Kali Linux Bug Bounty Toolkit Installer
+  █████╗ ██████╗ ███████╗██╗  ██╗
+ ██╔══██╗██╔══██╗██╔════╝╚██╗██╔╝
+ ███████║██████╔╝█████╗   ╚███╔╝ 
+ ██╔══██║██╔═══╝ ██╔══╝   ██╔██╗ 
+ ██║  ██║██║     ███████╗██╔╝ ██╗
+ ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝
+  Kali Linux Apex Installer
 EOF
 echo -e "${NC}"
 
@@ -235,9 +235,9 @@ for RC in ~/.bashrc ~/.zshrc; do
     fi
 done
 
-# ── Write tool paths config for orchestrator ────────────────
+# ── Write tool paths config for Apex ────────────────────────
 info "Writing tools config..."
-cat > "$HOME/.bugbounty_tools.json" << TOOLSEOF
+cat > "$HOME/.apex_tools.json" << TOOLSEOF
 {
   "jwt_tool":     "$TOOLS_DIR/jwt_tool/jwt_tool.py",
   "smuggler":     "$TOOLS_DIR/smuggler/smuggler.py",
@@ -252,7 +252,7 @@ cat > "$HOME/.bugbounty_tools.json" << TOOLSEOF
   "tools_dir":    "$TOOLS_DIR"
 }
 TOOLSEOF
-success "Tools config written to ~/.bugbounty_tools.json"
+success "Tools config written to ~/.apex_tools.json"
 
 # ── Summary ─────────────────────────────────────────────────
 echo ""
@@ -270,6 +270,6 @@ done
 echo ""
 echo -e "${CYAN}Next step:${NC}"
 echo "  source ~/.bashrc"
-echo "  python3 orchestrator.py -t example.com"
+echo "  python3 apex.py -t example.com"
 echo ""
 warn "Remember: Only use these tools on targets you have explicit permission to test."

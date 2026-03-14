@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-BugBounty Orchestrator v4.0 — PART 1: Core + Recon + Discovery
+Apex v4.0 — PART 1: Core + Recon + Discovery
 ===============================================================
-Combine with attack.py to produce the full orchestrator:
-    cat core.py attack.py > orchestrator.py
+Combine with attack.py to produce the full apex:
+    cat core.py attack.py > apex.py
 
 Standalone imports are safe — no circular dependencies.
 """
@@ -54,16 +54,16 @@ WORDLISTS = {
 
 # Load tool paths written by install.sh
 _CFG: dict = {}
-_CFG_PATH = Path.home() / ".bugbounty_tools.json"
+_CFG_PATH = Path.home() / ".apex_tools.json"
 if _CFG_PATH.exists():
     try:
         _CFG = json.loads(_CFG_PATH.read_text())
     except Exception:
         pass
 
-# Global config from ~/.bugbounty_config.yaml (Fix 6)
+# Global config from ~/.apex_config.yaml (Fix 6)
 CONFIG: dict = {}
-_USER_CONFIG = Path.home() / ".bugbounty_config.yaml"
+_USER_CONFIG = Path.home() / ".apex_config.yaml"
 if _USER_CONFIG.exists():
     try:
         import yaml
@@ -585,7 +585,7 @@ class BaseRunner:
         
         # Basic Evasion (Fix 5)
         ip = ".".join(str(random.randint(1, 254)) for _ in range(4))
-        h = {"User-Agent": "Mozilla/5.0 BugBounty/4.1",
+        h = {"User-Agent": "Mozilla/5.0 Apex/4.1",
              "Accept":     "text/html,application/json,*/*",
              "X-Forwarded-For": ip, "X-Real-IP": ip, "X-Originating-IP": ip}
         
@@ -705,7 +705,7 @@ class SubfinderRunner(BaseRunner):
         # crt.sh passive
         subs.update(self._crtsh())
 
-        # Scope enforcement (Fix 3) handled by Orchestrator calling this,
+        # Scope enforcement (Fix 3) handled by Apex calling this,
         # but let's filter here too for safety.
         scope = self.opts.get("scope_patterns", [])
         if scope:
@@ -816,7 +816,7 @@ class DNSXRunner(BaseRunner):
                 ctx.check_hostname = False
                 ctx.verify_mode    = ssl.CERT_NONE
                 req = urllib.request.Request(
-                    url, headers={"User-Agent": "Mozilla/5.0 BugBounty/4.1"})
+                    url, headers={"User-Agent": "Mozilla/5.0 Apex/4.1"})
                 with urllib.request.urlopen(req, timeout=8, context=ctx) as r:
                     body = r.read(50_000).decode("utf-8", errors="ignore")
                     if fingerprint.lower() in body.lower():
@@ -1562,4 +1562,4 @@ class SecretJSRunner(BaseRunner):
         return list(urls)[:80]
 
 # ── END OF PART 1 ──────────────────────────────────────────────
-# Continue with attack.py (cat core.py attack.py > orchestrator.py)
+# Continue with attack.py (cat core.py attack.py > apex.py)

@@ -1,10 +1,10 @@
-# BugBounty Orchestrator v4.1
+# Apex v4.1
 
 Automated bug bounty reconnaissance and attack orchestration toolkit for Kali Linux and WSL2.
 
 ## 🚀 Overview
 
-The BugBounty Orchestrator is a high-performance scanning engine that automates the transition from subdomain discovery to vulnerability exploitation. It intelligently decides which tools to run based on the detected technology stack of each target.
+Apex is a high-performance scanning engine that automates the transition from subdomain discovery to vulnerability exploitation. It intelligently decides which tools to run based on the detected technology stack of each target.
 
 ## ✨ Key Features
 
@@ -27,10 +27,10 @@ source ~/.bashrc
 
 ## ⚙️ Configuration
 
-You can configure API keys (Shodan, VirusTotal, etc.) and global settings in `~/.bugbounty_config.yaml`.
+You can configure API keys (Shodan, VirusTotal, etc.) and global settings in `~/.apex_config.yaml`.
 
 ```yaml
-# Example ~/.bugbounty_config.yaml
+# Example ~/.apex_config.yaml
 api_keys:
   shodan: "YOUR_KEY"
   virustotal: "YOUR_KEY"
@@ -41,12 +41,12 @@ webhook_url: "https://discord.com/api/webhooks/..."
 
 ### Basic Scan
 ```bash
-python3 orchestrator.py -t example.com
+python3 apex.py -t example.com
 ```
 
 ### Full Scan with OOB and Scope
 ```bash
-python3 orchestrator.py -t example.com --oob --scope scope.txt
+python3 apex.py -t example.com --oob --scope scope.txt
 ```
 
 ### Options
