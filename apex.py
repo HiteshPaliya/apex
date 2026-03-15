@@ -1946,6 +1946,7 @@ class SSRFRunner(BaseRunner):
             for line in self.stream_cmd([
                 "python3", str(SSRFMAP),
                 "-r", str(ssrf_f), "-p", "url", "--lhost", oob_lhost,
+                "-m", "readfiles,networkscan,alibaba,aws,gcp,azure",
             ], timeout=180):
                 if "ssrf" in line.lower() and "found" in line.lower():
                     self.add("ss1", f"SSRFmap: {line[:100]}", "high", "firm", line[:200])
