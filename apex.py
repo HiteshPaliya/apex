@@ -251,7 +251,7 @@ class OOBManager:
         self._out_file = out_dir / "oob_callbacks.json"
         cmd = [
             self.reg.path("interactsh-client"),
-            "-server", "oast.fun", "-json",
+            "-server", "http://155.248.244.198.nip.io", "-json",
             "-o", str(self._out_file), "-v",
         ]
         try:
@@ -261,7 +261,7 @@ class OOBManager:
             while time.time() < deadline:
                 line = self._proc.stdout.readline()
                 m = re.search(
-                    r'([a-z0-9]{8,}\.oast\.(?:fun|me|live|pro|online|site))', line)
+                    r'([a-z0-9]{8,}\.155\.248\.244\.198\.nip\.io)', line)
                 if m:
                     self.domain  = m.group(1)
                     self._active = True
@@ -1783,7 +1783,10 @@ class SqlmapRunner(BaseRunner):
                 "-u", url, "--batch", "--random-agent",
                 "--level", "3", "--risk", "2",
                 "--output-dir", str(sql_dir),
-                "--forms", "--crawl", "1",
+                "--forms",
+                "--crawl",    "0",
+                "--smart",
+                "--time-sec", "10",
                 "--timeout", "15", "--retries", "1",
                 "--threads", "3", "--flush-session",
                 "--headers", f"X-Forwarded-For: {self._random_ip()}",
